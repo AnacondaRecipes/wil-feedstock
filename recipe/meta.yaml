@@ -1,6 +1,5 @@
 {% set name = "wil" %}
 {% set version = "1.0.250325.1" %}
-{% set sha256 = "c9e667d5f86ded43d17b5669d243e95ca7b437e3a167c170805ffd4aa8a9a786" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +7,7 @@ package:
 
 source:
   url: https://github.com/microsoft/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: c9e667d5f86ded43d17b5669d243e95ca7b437e3a167c170805ffd4aa8a9a786
 
 build:
   number: 0
@@ -17,14 +16,13 @@ build:
 requirements:
   build:
     - {{ compiler("cxx") }}
-    - {{ stdlib("c") }}
     - cmake
     - ninja
 
 test:
   commands:
     - if not exist %PREFIX%\\Library\\share\\cmake\\WIL\\wilConfig.cmake exit 1
-    - if not exist %PREFIX%\\Library\\include\\wil\\com.h exit 1
+    - if not exist %LIBRARY_INC%\\wil\\com.h exit 1
 
 about:
   home: https://github.com/microsoft/wil
